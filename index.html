@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            padding-top: 50px;
+        }
+        h1 {
+            color: #d63384;
+        }
+        #question-box {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ff4d6d;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        #yes {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        #yes:hover {
+            background-color: #d63384;
+        }
+        #no {
+            background-color: #333;
+            color: white;
+            position: absolute;
+        }
+        #message {
+            font-size: 22px;
+            color: #ff4d6d;
+            margin-top: 20px;
+            display: none;
+        }
+        .hidden {
+            display: none;
+        }
+        .celebration {
+            font-size: 40px;
+            color: #ff4d6d;
+            display: none;
+            animation: pop 0.5s ease-in-out infinite alternate;
+        }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <h1>Hey Babe! ❤️</h1>
+    <p id="question-box">Ready for a fun quiz?</p>
+    
+    <div id="buttons" class="button-container">
+        <button id="yes" onclick="nextQuestion()">Yes!</button>
+    </div>
+    
+    <p id="message" class="hidden">Yay! I knew you'd say yes! ❤️</p>
+    <p id="celebration" class="celebration">🎉💖💘🥰🎊</p>
+    
+    <script>
+        const questions = [
+            "Do you think I'm cute? 😏",
+            "Would you like a surprise date soon? 🌟",
+            "Do you love me? ❤️",
+            "Will you be my Valentine? 💕"
+        ];
+        
+        let questionIndex = 0;
+        
+        function nextQuestion() {
+            if (questionIndex < questions.length - 1) {
+                document.getElementById("question-box").textContent = questions[questionIndex];
+                questionIndex++;
+            } else {
+                finalQuestion();
+            }
+        }
+        
+        function finalQuestion() {
+            document.getElementById("question-box").textContent = questions[questionIndex];
+            document.getElementById("buttons").innerHTML = `
+                <button id="yes" onclick="showMessage()">Yes</button>
+                <button id="no" onmouseover="moveButton()">No</button>
+            `;
+        }
+        
+        function showMessage() {
+            document.getElementById("message").style.display = "block";
+            document.getElementById("celebration").style.display = "block";
+        }
+        
+        function moveButton() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            document.getElementById("no").style.left = `${x}px`;
+            document.getElementById("no").style.top = `${y}px`;
+        }
+    </script>
+</body>
+</html>
